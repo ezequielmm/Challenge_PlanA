@@ -15,7 +15,6 @@ namespace ChallengePlanA.UI
         private GameObject _gameOverPanel;
         private TextMeshProUGUI _finalScoreText;
         private Button _replayButton;
-        private Button _makeMoveButton;
 
         private void Awake()
         {
@@ -67,6 +66,7 @@ namespace ChallengePlanA.UI
                         if (child.name == "GameOverPanel")
                         {
                             _gameOverPanel = child.gameObject;
+                            // Debug.Log("found GameOverPanel through manual search");
                             break;
                         }
                     }
@@ -81,9 +81,6 @@ namespace ChallengePlanA.UI
                 Transform replayT = _gameOverPanel.transform.Find("ReplayButton");
                 if (replayT != null) _replayButton = replayT.GetComponent<Button>();
             }
-
-            GameObject makeMoveObj = GameObject.Find("MakeMoveButton");
-            if (makeMoveObj != null) _makeMoveButton = makeMoveObj.GetComponent<Button>();
         }
 
         private void SubscribeEvents()
@@ -114,12 +111,6 @@ namespace ChallengePlanA.UI
             {
                 _replayButton.onClick.RemoveAllListeners();
                 _replayButton.onClick.AddListener(OnReplayPressed);
-            }
-
-            if (_makeMoveButton != null)
-            {
-                _makeMoveButton.onClick.RemoveAllListeners();
-                _makeMoveButton.onClick.AddListener(OnMakeMovePressed);
             }
         }
 
@@ -154,13 +145,6 @@ namespace ChallengePlanA.UI
         {
             var gm = Core.GameManager.Instance;
             if (gm != null) gm.ResetGame();
-        }
-
-        // test button for Task 2, will be removed in Task 3
-        private void OnMakeMovePressed()
-        {
-            var gm = Core.GameManager.Instance;
-            if (gm != null) gm.MakeMove(10);
         }
     }
 }

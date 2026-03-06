@@ -42,6 +42,7 @@ namespace ChallengePlanA.Core
         private void Start()
         {
             ResetGame();
+            Debug.Log($"GameManager ready. Moves: {_movesRemaining}");
         }
 
         /// <summary>
@@ -61,6 +62,7 @@ namespace ChallengePlanA.Core
             if (_movesRemaining <= 0)
             {
                 _isGameOver = true;
+                Debug.Log($"Game Over! Final score: {_score}");
                 OnGameOver?.Invoke(_score);
             }
         }
